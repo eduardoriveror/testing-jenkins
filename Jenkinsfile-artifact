@@ -16,11 +16,8 @@ pipeline {
             steps {
                 sh "docker build ."
                 sh "docker save -o image.tar"
+                archiveArtifacts 'image.tar'
             }
         }
-    }
-
-    post {
-        archiveArtifacts 'image.tar'
     }
 }

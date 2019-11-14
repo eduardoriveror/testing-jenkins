@@ -14,7 +14,6 @@ pipeline {
 
         stage('build') {
             steps {
-                git "https://github.com/eduardoriveror/testing-jenkins.git"
                 sh "chmod +x basic-script.sh"
                 sh "./basic-script.sh ${NAME} ${LASTNAME}"
             }

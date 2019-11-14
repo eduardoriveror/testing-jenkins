@@ -1,0 +1,26 @@
+pipeline {
+    agent { label 'docker' }
+
+    parameters {
+        string defaultValue: 'EDUARDO', description: '', name: 'NAME', trim: false
+        string defaultValue: 'RIVERO', description: '', name: 'LASTNAME', trim: false
+    }
+
+
+    stages {
+        stage('Validate pipeline') {
+            steps { validateDeclarativePipeline 'Jenkinsfile' }
+        }
+
+        stage('build') {
+            steps {
+                sh "docker build ."
+                sh "docker save -o image.tar"
+            }
+        }
+    }
+
+    post {
+        archiveArtifacts 'image.tar'
+    }
+}
